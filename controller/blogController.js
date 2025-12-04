@@ -1,5 +1,6 @@
 import httpError from "../middleware/errorHandling.js"
 import blogAuth from "../model/blogModel.js";
+import User from "../model/userModel.js";
 
 
 const addBlog = async(req,res,next)=>{
@@ -19,6 +20,9 @@ const addBlog = async(req,res,next)=>{
         const savedata = new blogAuth(newData)
 
         await savedata.save()
+
+        // const user = await User.findById(req.user.id)
+        
 
         if(!savedata){
             return next(new httpError("blog can't addedd",400))
